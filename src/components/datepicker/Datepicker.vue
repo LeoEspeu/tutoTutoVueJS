@@ -5,9 +5,9 @@
 </style>
 <template>
   <div class="datepicker_container">
-    <input type="text" :value="date_formated">
-    <input type="text" :name="name" :value="date_raw">
-    <datepicker-agenda v-bind:date="date"></datepicker-agenda>
+    <input type="text" :value="date_formated" @click="showDatepicker()">
+    <input type="hidden" :name="name" :value="date_raw">
+    <datepicker-agenda :date="date" :visible="isVisible" @update-date="update" @cancel="hideDatepicker()"></datepicker-agenda>
   </div>
 </template>
 <script>
@@ -28,7 +28,22 @@ export default{
   },
   data: function () {
     return {
+      isVisible: false,
       date: moment(this.value, 'YYYY-MM-DD')
+    }
+  },
+  methods: {
+    update(date) {
+      this.date = date;
+      this.hideDatepicker()
+    },
+    showDatepicker: function (){
+      this.isVisible = true;
+      setTimeout(() => document.addEventListener('click',this.hideDatepicker),0)
+    },
+    hideDatepicker: function (){
+      this.isVisible = false;
+      document.removeEventListener('click',this.hideDatepicker)
     }
   },
   computed: {

@@ -1,4 +1,6 @@
-import moment from 'moment'
+import Moment from 'moment'
+import { extendMoment } from 'moment-range'
+const moment = extendMoment(Moment)
 
 export default class Month{
 
@@ -13,4 +15,17 @@ export default class Month{
     return this.start.weekday()
   }
 
+  getWeeks(){
+    return this.end.week() - this.start.week() + 1
+  }
+
+  getDays(){
+    var range = moment.range(this.start,this.end);
+    const days = Array.from(range.by('days'));
+    return days;
+  }
+
+  getFormatted(){
+    return this.start.format('MMMM YYYY')
+  }
 }

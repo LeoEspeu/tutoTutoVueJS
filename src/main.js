@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Vue from 'vue'
-import DatePickerComponent from './components/Datepicker.vue'
+import DatePickerComponent from './components/datepicker/Datepicker.vue'
 
 
 /* eslint-disable no-new */
